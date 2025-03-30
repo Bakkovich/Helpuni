@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>amoCRM Response</title>
+  <script src="libs/ansi_up.js"></script>
+  <script src="amocrm.js" defer></script>
+  <style>
+    body {
+      color: #CCCCCC;
+      background-color: #0C0C0C;
+      font-family: 'Cascadia Mono', 'Cascadia Code', Consolas, monospace;
+      font-size: 12px;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #9370DB;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .info-box {
+      background-color: #1C1C1C;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #9370DB;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #8A2BE2;
+    }
+
+    .result-container {
+      background-color: #1C1C1C;
+      padding: 15px;
+      border-radius: 4px;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .user-card {
+      border: 1px solid #333;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .user-header {
+      background-color: #2C2C2C;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .user-header:hover {
+      background-color: #3C3C3C;
+    }
+
+    .user-name {
+      font-weight: bold;
+      color: #9370DB;
+    }
+
+    .user-email {
+      color: #888;
+    }
+
+    .user-details {
+      padding: 10px;
+      background-color: #1C1C1C;
+    }
+
+    .users-summary {
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: #9370DB;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+
+    h4, h5 {
+      margin-bottom: 5px;
+      color: #9370DB;
+    }
+
+    .loader {
+      border: 15px solid #2C2C2C;
+      border-top: 15px solid #9370DB;
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      animation: spin 1s linear infinite;
+      margin: 20% auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>amoCRM Response</h1>
+    <div id="domain" class="info-box"></div>
+    <div id="token" class="info-box" style="display: none;"></div>
+    <div class="button-container">
+      <button id="getUsers">Пользователи</button>
+      <button id="searchContact">Поиск контакта</button>
+      <button id="searchLead">Поиск сделки</button>
+    </div>
+    <div id="result" class="result-container">
+      <div class="loader" id="loader" style="display: none;"></div>
+    </div>
+  </div>
+</body>
+</html>

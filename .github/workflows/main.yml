@@ -1,0 +1,47 @@
+name: CI
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+
+    # - name: Check for changes in extension_chrome
+    #   id: check_changes
+    #   run: |
+    #     if [ "$(git rev-parse --abbrev-ref HEAD)" = "main" ]; then
+    #       BASE_BRANCH="origin/main"
+    #     else
+    #       BASE_BRANCH="origin/$(git rev-parse --abbrev-ref HEAD)"
+    #     fi
+
+    #     if git diff --name-only $BASE_BRANCH HEAD | grep '^extension_chrome/'; then
+    #       echo "changes=true" >> $GITHUB_ENV
+    #     else
+    #       echo "changes=false" >> $GITHUB_ENV
+    #     fi
+
+    # - name: Bump version if changes detected
+    #   if: env.changes == 'true'
+    #   run: |
+    #     VERSION_FILE="./backend/version.json"
+    #     NEW_VERSION=$(jq -r '.version' $VERSION_FILE | awk -F. -v OFS=. '{$NF += 1 ; print}')
+    #     jq --arg new_version "$NEW_VERSION" '.version = $new_version' $VERSION_FILE > tmp.$$.json && mv tmp.$$.json $VERSION_FILE
+    #     echo "New version: $NEW_VERSION"
+
+
+    - name: Set up Docker Buildx
+      run: docker compose build
+
+    - name: Build and run services
+      run: docker compose up -d 
+
+    - name: Remove unused images
+      run: docker image prune -f 
+
+    - name: Clean up dangling cache
+      run: docker builder prune -f 
+

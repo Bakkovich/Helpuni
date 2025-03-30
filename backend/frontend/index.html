@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Helpuni</title>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="icon" type="image/ico" href="https://lk.sipuni.com/favicon.ico">
+		<link rel="stylesheet" href="style.css">
+    <script src="./js/nav.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/admin.js"></script>
+    <script src="./js/newamocrm.js"></script>
+    <script src="./js/linedata.js"></script>
+    <script src="./js/newapi.js"></script>
+    <script src="./js/checkoperator.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- <button id="download-extension" style="position:absolute; top:15px; left:30px; background-color: #8A2BE2; color: white; padding: 10px; border: none; cursor: pointer;">
+      Скачать расширение
+    </button>
+    <script>
+      document.getElementById('download-extension').onclick = function() {
+        window.location.href = '/extension_chrome.zip';
+      };
+    </script> -->
+    <video autoplay muted loop playsinline class="back-video" poster="bg.webp">
+      <source src="bg.webm" type="video/webm">
+    </video>
+    <picture id="logo" class="logo">
+      <a onmousedown="sessionStorage.setItem('time', Date.now())" onmouseup="if(Date.now() > (parseInt(sessionStorage.getItem('time'))+5)) window.location.href='https://hentailib.me/'" href='helpuni.zip'><img src="helpunilogo.webp"></a>
+      <a style="margin-top:38%; width:auto" class="btn-dwnld monomakh-regular" href="helpuni.zip">скачать расширение</a>
+    </picture>
+    <nav id="mySidenav" class="menu">
+      <a class="closebtn" onclick="closeNav()">&times;</a>
+    </nav>
+    <button id="regbtn" style="display:none; background-color: #020c2e;top:15px;right:90px;width:150px;position:absolute;" onclick="createForm('register2')">Регистрация</button>
+    <button id="menubtn" style="background-color: #020c2e;font-size:30px;top:15px;left:15px;width:65px;position:absolute; padding-top:8px; padding-bottom:11px;" onclick="openNav()">&#9776;</button>
+    <button id="loginbtn" style="display:none; background-color: #020c2e;top:15px;right:15px;width:65px;position:absolute; padding-bottom:9px; padding-left:5px;" onclick="createForm('login')">
+      <svg xmlns="http://www.w3.org/2000/svg" width="36px" height="36px" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21v-2h7V5h-7V3h7q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21zm-2-4l-1.375-1.45l2.55-2.55H3v-2h8.175l-2.55-2.55L10 7l5 5z"></path></svg>
+    </button>
+    <div class="profile" id="profile" style="display:none;">
+      <div style="display: flex;flex-direction: row; flex-wrap:nowrap;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="36px" height="36px" viewBox="0 0 24 24" style="margin-right:20px;"><g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"><path d="M16 9a4 4 0 1 1-8 0a4 4 0 0 1 8 0m-2 0a2 2 0 1 1-4 0a2 2 0 0 1 4 0"/><path d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1M3 12c0 2.09.713 4.014 1.908 5.542A8.99 8.99 0 0 1 12.065 14a8.98 8.98 0 0 1 7.092 3.458A9 9 0 1 0 3 12m9 9a8.96 8.96 0 0 1-5.672-2.012A6.99 6.99 0 0 1 12.065 16a6.99 6.99 0 0 1 5.689 2.92A8.96 8.96 0 0 1 12 21"/></g></svg>
+      <div style="margin-top:5px" id="username"></div>
+      </div><div style="margin-left:20px;"><a onclick="createForm('settings')" id="settings" style="cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="36px" height="36px" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M13.765 2.152C13.398 2 12.932 2 12 2s-1.398 0-1.765.152a2 2 0 0 0-1.083 1.083c-.092.223-.129.484-.143.863a1.62 1.62 0 0 1-.79 1.353a1.62 1.62 0 0 1-1.567.008c-.336-.178-.579-.276-.82-.308a2 2 0 0 0-1.478.396C4.04 5.79 3.806 6.193 3.34 7s-.7 1.21-.751 1.605a2 2 0 0 0 .396 1.479c.148.192.355.353.676.555c.473.297.777.803.777 1.361s-.304 1.064-.777 1.36c-.321.203-.529.364-.676.556a2 2 0 0 0-.396 1.479c.052.394.285.798.75 1.605c.467.807.7 1.21 1.015 1.453a2 2 0 0 0 1.479.396c.24-.032.483-.13.819-.308a1.62 1.62 0 0 1 1.567.008c.483.28.77.795.79 1.353c.014.38.05.64.143.863a2 2 0 0 0 1.083 1.083C10.602 22 11.068 22 12 22s1.398 0 1.765-.152a2 2 0 0 0 1.083-1.083c.092-.223.129-.483.143-.863c.02-.558.307-1.074.79-1.353a1.62 1.62 0 0 1 1.567-.008c.336.178.579.276.819.308a2 2 0 0 0 1.479-.396c.315-.242.548-.646 1.014-1.453s.7-1.21.751-1.605a2 2 0 0 0-.396-1.479c-.148-.192-.355-.353-.676-.555A1.62 1.62 0 0 1 19.562 12c0-.558.304-1.064.777-1.36c.321-.203.529-.364.676-.556a2 2 0 0 0 .396-1.479c-.052-.394-.285-.798-.75-1.605c-.467-.807-.7-1.21-1.015-1.453a2 2 0 0 0-1.479-.396c-.24.032-.483.13-.82.308a1.62 1.62 0 0 1-1.566-.008a1.62 1.62 0 0 1-.79-1.353c-.014-.38-.05-.64-.143-.863a2 2 0 0 0-1.083-1.083Z"/></g></svg></a>
+      <a id="logout" style="cursor:pointer; margin-left:10px;"><svg xmlns="http://www.w3.org/2000/svg" width="36px" height="36px" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="#d14543" d="M12 3a1 1 0 0 1 .117 1.993L12 5H7a1 1 0 0 0-.993.883L6 6v12a1 1 0 0 0 .883.993L7 19h4.5a1 1 0 0 1 .117 1.993L11.5 21H7a3 3 0 0 1-2.995-2.824L4 18V6a3 3 0 0 1 2.824-2.995L7 3zm5.707 5.464l2.828 2.829a1 1 0 0 1 0 1.414l-2.828 2.829a1 1 0 1 1-1.414-1.415L17.414 13H12a1 1 0 1 1 0-2h5.414l-1.121-1.121a1 1 0 0 1 1.414-1.415"/></g></svg></a></div>
+     </div>
+    <div class="wrapper" id="wrapper"></div>
+  </body>
+</html>
+

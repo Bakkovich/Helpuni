@@ -1,0 +1,102 @@
+x-logging: &default-logging
+  driver: loki
+  options:
+    loki-url: 'http://localhost:3100/api/prom/push'
+    loki-pipeline-stages: |
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{1,2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<time>\d{4}-\d{2}-\d{2} \d{1,2}:\d{2}:\d{2},d{3}) (?P<message>(?s:.*))$$'
+services:
+  loki:
+    image: grafana/loki:3.0.0
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"
+
+  app-helpuni:
+    container_name: app-helpuni
+    build:
+      context: ./backend
+    command: bash -c 'uvicorn main:app --host 0.0.0.0'
+    depends_on:
+      - loki
+      - redis
+    ports:
+      - 8097:8000
+    expose:
+      - 8097
+    volumes:
+      - /tmp/ssh-agent.sock:/ssh-agent
+      - /home/ryzhenko/helpuni:/app
+      - /home/ryzhenko/response:/backend/response  # Добавлено для сохранения HTML файлов
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+      - REDIS_URL=redis://redis:6379/0
+      - DB_HOST=host
+      - DB_PORT=5432
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - SECRET_KEY=SECRET_KEY
+      - ALGORITHM=HS256
+      - APP_NAME=app-helpuni
+    networks:
+      - helpuni
+    logging: *default-logging
+
+  prometheus:
+    image: prom/prometheus:v2.51.2
+    ports:
+      - "9090:9090"
+    volumes:
+      - /home/ryzhenko/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --enable-feature=exemplar-storage
+    depends_on:
+      - loki
+    networks:
+      - helpuni
+    logging: *default-logging
+    
+  tempo:
+    image: grafana/tempo:2.4.1
+    command: [ "--target=all", "--storage.trace.backend=local", "--storage.trace.local.path=/var/tempo", "--auth.enabled=false" ]
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+    depends_on:
+      - loki
+    networks:
+      - helpuni
+    logging: *default-logging
+
+  grafana:
+    image: grafana/grafana:10.4.2
+    ports:
+      - "3001:3000"
+    volumes:
+      - /home/ryzhenko/grafana:/etc/grafana/provisioning/datasources
+      - /home/ryzhenko/dh:/etc/grafana/provisioning/dashboards/
+      - /home/ryzhenko/dash:/etc/grafana/dashboards
+    depends_on:
+      - loki
+      - prometheus
+    networks:
+      - helpuni
+    logging: *default-logging
+
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - helpuni
+    logging: *default-logging
+
+networks:
+  helpuni:
+    driver: bridge
